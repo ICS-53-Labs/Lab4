@@ -2,25 +2,7 @@
 /* Name: Joseph Park, ID: 24136956 */
 /* Name: Alex Dunn, ID: 28474741 */
 #include "csapp.h"
-#include <netinet/tcp.h>
-/* WebProxy Lab */
-/* Logging:
- * Log on each line each message:
- * Date: browserIP URL size
- * browserIP is the IP of the client
- * URL is the site URL
- * size is the number of bytes in reply - Received from end server from when the connection is opened to closed
- * Only requests met be a response are logged.
- */
-/* HTTP Requset Format:
- * COMMAND URL VERSION\r\n
- * blah blah\r\n
- * \r\n
- * HTTP Reply Format:
- * VERSION CODE STATUS\r\n
- * blah\r\n
- * \r\n
- */
+//#include <netinet/tcp.h>
  /* Compile with gcc .c .c -lpthread -o name */
  
  
@@ -53,8 +35,8 @@
 #define MAX_PORT 65536
 
 #define GET_ONLY 0
-#define DEBUG 1
-#define NFO 1
+#define DEBUG 0
+#define NFO 0
 #define NO_DELAY 0
 #define READ 1
 
@@ -325,12 +307,12 @@ int open_clientfd_no_delay(char *hostname, char *port) {
             continue; /* Socket failed, try the next */
 
 			
-		if(setsockopt(clientfd,IPPROTO_TCP,TCP_NODELAY,(const void*)&optval,sizeof(int)) < 0) {
+		/*if(setsockopt(clientfd,IPPROTO_TCP,TCP_NODELAY,(const void*)&optval,sizeof(int)) < 0) {
 			return SOCK_OPT_FAILURE;
 		}
 		if(setsockopt(clientfd,IPPROTO_TCP,TCP_QUICKACK,(const void*)&optval,sizeof(int)) < 0) {
 			return SOCK_OPT_FAILURE;
-		}
+		}*/
 		
         /* Connect to the server */
         if (connect(clientfd, p->ai_addr, p->ai_addrlen) != -1)
